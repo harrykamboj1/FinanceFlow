@@ -3,7 +3,6 @@
 import { NavButton } from "@/components/nav-button";
 import { useMedia } from "react-use";
 import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
 
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -49,22 +48,27 @@ const Navigation = () => {
       <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
         <SheetTrigger>
           <Button
-            variant={"outline"}
-            size={"sm"}
-            className={cn(
-              "font-normal bg-white/10 hover:bg-white/20 hover:text-white border-none focus-visible:ring-transparent outline-none text-white focus:bg-white/30 transition"
-            )}
+            variant="outline"
+            size="sm"
+            className="font-normal bg-white/10 hover:bg-white/20 hover:text-white border-none focus-visible:ring-offset-0 focus-visible:ring-transparent outline-none text-white focus:bg-white/30 transition"
           >
             <Menu className="size-4" />
           </Button>
-          <SheetContent side={"left"} className="px-2">
-            <nav className="flex flex-col gap-y-2 pt-6">{routes.map((route)=>(
-                <Button variant={route.href === pathName? "secondary" : "ghost"}>
-
-                </Button>
-            )}</nav>
-          </SheetContent>
         </SheetTrigger>
+        <SheetContent side="left" className="px-2">
+          <nav className="flex flex-col gap-y-2 pt-6">
+            {routes.map((route) => (
+              <Button
+                className="w-full justify-start"
+                key={route.href}
+                variant={route.label === pathName ? "secondary" : "ghost"}
+                onClick={() => onClick(route.href)}
+              >
+                {route.label}
+              </Button>
+            ))}
+          </nav>
+        </SheetContent>
       </Sheet>
     );
   }

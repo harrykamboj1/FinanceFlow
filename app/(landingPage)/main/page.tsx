@@ -15,7 +15,7 @@ const LandingPage = () => {
         </div>
         <div className="px-2 space-x-2">
           <Button
-            className="hover:bg-white/20"
+            className="hover:bg-white/90"
             variant="customColor"
             onClick={() => {
               router.push("/");
