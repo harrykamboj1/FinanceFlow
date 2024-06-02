@@ -35,7 +35,7 @@ const app = new Hono()
         return c.json({ error: "unauthorized" }, 401);
       }
 
-      const response = await db
+      const [data] = await db
         .insert(accounts)
         .values({
           id: createId(),
@@ -44,7 +44,7 @@ const app = new Hono()
         })
         .returning();
 
-      return c.json({ response });
+      return c.json({ data });
     }
   );
 
