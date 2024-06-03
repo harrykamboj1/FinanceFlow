@@ -10,7 +10,7 @@ import {
 import { AccountForm } from "./account-form";
 import { insertAccountSchema } from "@/database/schema";
 import { z } from "zod";
-import { useCreateAccount } from "../hooks/use-create-account";
+import { useCreateAccount } from "../api/use-create-account";
 
 const formSchema = insertAccountSchema.pick({
   name: true,

@@ -14,7 +14,7 @@ import { columns } from "./columns";
 import { DataTable } from "@/components/data-table";
 import { useGetAccounts } from "@/features/accounts/api/use-get-account";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useBulkDelete } from "@/features/accounts/hooks/use-bulk-delete";
+import { useBulkDelete } from "@/features/accounts/api/use-bulk-delete";
 
 const AccountPage = () => {
   const newAccount = useNewAccount();
