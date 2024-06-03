@@ -8,10 +8,10 @@ import {
 import { AccountForm } from "./account-form";
 import { insertAccountSchema } from "@/database/schema";
 import { z } from "zod";
-import { useCreateAccount } from "../api/use-create-account";
 import { useOpenAccount } from "../hooks/use-open-account";
 import { useGetAccountById } from "../api/use-get-account-by-id";
 import { Loader2 } from "lucide-react";
+import { useEditAccount } from "../api/use-edit-account";
 
 const formSchema = insertAccountSchema.pick({
   name: true,
@@ -23,14 +23,15 @@ export function EditAsccountSheet() {
   const { isOpen, onClose, id } = useOpenAccount();
 
   const accountQuery = useGetAccountById(id);
+  const editMutation = useEditAccount(id);
 
-  const mutation = useCreateAccount();
+  const isPending = editMutation.isPending;
 
   const isLoading = accountQuery.isLoading;
 
   const onSubmit = (values: FormValues) => {
     console.log(values);
-    mutation.mutate(values, {
+    editMutation.mutate(values, {
       onSuccess: () => {
         onClose();
       },
@@ -60,7 +61,7 @@ export function EditAsccountSheet() {
           <AccountForm
             id={id}
             onSubmit={onSubmit}
-            disabled={mutation.isPending}
+            disabled={isPending}
             defaultValues={defaultValues}
           />
         )}
