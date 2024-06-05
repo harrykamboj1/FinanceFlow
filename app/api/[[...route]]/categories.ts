@@ -1,5 +1,5 @@
 import { db } from "@/database/drizzle";
-import { accounts, insertAccountSchema } from "@/database/schema";
+import { categories, insertCategorySchema } from "@/database/schema";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { createId } from "@paralleldrive/cuid2";
 import { Hono } from "hono";
@@ -17,11 +17,11 @@ const app = new Hono()
 
     const data = await db
       .select({
-        id: accounts.id,
-        name: accounts.name,
+        id: categories.id,
+        name: categories.name,
       })
-      .from(accounts)
-      .where(eq(accounts.userId, auth.userId));
+      .from(categories)
+      .where(eq(categories.userId, auth.userId));
 
     return c.json({ data });
   })
@@ -46,11 +46,11 @@ const app = new Hono()
 
       const [data] = await db
         .select({
-          id: accounts.id,
-          name: accounts.name,
+          id: categories.id,
+          name: categories.name,
         })
-        .from(accounts)
-        .where(and(eq(accounts.userId, auth.userId), eq(accounts.id, id)));
+        .from(categories)
+        .where(and(eq(categories.userId, auth.userId), eq(categories.id, id)));
 
       if (!data) {
         return c.json({ error: "Not Found" }, 404);
@@ -61,7 +61,7 @@ const app = new Hono()
   .post(
     "/",
     clerkMiddleware(),
-    zValidator("json", insertAccountSchema.pick({ name: true })),
+    zValidator("json", insertCategorySchema.pick({ name: true })),
     async (c) => {
       const auth = getAuth(c);
       const values = c.req.valid("json");
@@ -70,7 +70,7 @@ const app = new Hono()
       }
 
       const [data] = await db
-        .insert(accounts)
+        .insert(categories)
         .values({
           id: createId(),
           userId: auth.userId,
@@ -97,15 +97,15 @@ const app = new Hono()
         return c.json({ error: "UnAuthorized" }, 401);
       }
       const data = await db
-        .delete(accounts)
+        .delete(categories)
         .where(
           and(
-            eq(accounts.userId, auth.userId),
-            inArray(accounts.id, values.ids)
+            eq(categories.userId, auth.userId),
+            inArray(categories.id, values.ids)
           )
         )
         .returning({
-          id: accounts.id,
+          id: categories.id,
         });
 
       return c.json({ data });
@@ -122,7 +122,7 @@ const app = new Hono()
     ),
     zValidator(
       "json",
-      insertAccountSchema.pick({
+      insertCategorySchema.pick({
         name: true,
       })
     ),
@@ -138,9 +138,9 @@ const app = new Hono()
       }
 
       const [data] = await db
-        .update(accounts)
+        .update(categories)
         .set(values)
-        .where(and(eq(accounts.id, id), eq(accounts.userId, auth.userId)))
+        .where(and(eq(categories.id, id), eq(categories.userId, auth.userId)))
         .returning();
 
       if (!data) {
@@ -171,8 +171,8 @@ const app = new Hono()
       }
 
       const [data] = await db
-        .delete(accounts)
-        .where(and(eq(accounts.id, id), eq(accounts.userId, auth.userId)))
+        .delete(categories)
+        .where(and(eq(categories.id, id), eq(categories.userId, auth.userId)))
         .returning();
 
       if (!data) {
