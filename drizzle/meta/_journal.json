@@ -15,6 +15,13 @@
       "when": 1717470403225,
       "tag": "0001_new_doctor_octopus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1717556572826,
+      "tag": "0002_cuddly_punisher",
+      "breakpoints": true
     }
   ]
 }
