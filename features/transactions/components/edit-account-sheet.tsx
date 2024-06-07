@@ -5,10 +5,10 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { AccountForm } from "./account-form";
+import { AccountForm } from "./transaction-form";
 import { insertAccountSchema } from "@/database/schema";
 import { z } from "zod";
-import { useOpenAccount } from "../hooks/use-open-account";
+import { useOpenAccount } from "../hooks/use-open-transaction";
 import { useGetAccountById } from "../api/use-get-transaction-by-id";
 import { Loader2 } from "lucide-react";
 import { useEditAccount } from "../api/use-edit-transaction";
