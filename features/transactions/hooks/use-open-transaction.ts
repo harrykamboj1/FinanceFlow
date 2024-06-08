@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type OpenAccountStata = {
+type OpenTransactionsState = {
   id?: string;
   isOpen: boolean;
   onOpen: (id: string) => void;
@@ -8,7 +8,7 @@ type OpenAccountStata = {
 };
 
 // To manage the State Of New Account Sheet
-export const useOpenAccount = create<OpenAccountStata>((set) => ({
+export const useOpenTransaction = create<OpenTransactionsState>((set) => ({
   id: undefined,
   isOpen: false,
   onOpen: (id: string) => set({ isOpen: true, id }),

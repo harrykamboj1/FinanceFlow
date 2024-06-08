@@ -26,6 +26,7 @@ export const useEditAccount = (id?: string) => {
       toast.success("Account Updated");
       query.invalidateQueries({ queryKey: ["account", { id }] });
       query.invalidateQueries({ queryKey: ["accounts"] });
+      query.invalidateQueries({ queryKey: ["transactions"] });
     },
     onError: () => {
       toast.error("Fail to create account");
