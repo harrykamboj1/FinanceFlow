@@ -16,6 +16,9 @@ import { useForm } from "react-hook-form";
 import { insertTransactionSchema } from "@/database/schema";
 import { Select } from "@/components/ui/select";
 import { DatePicker } from "@/components/date-picker";
+import { Textarea } from "@/components/ui/textarea";
+import { AmountInput } from "@/components/amount-input";
+import { convertAmountToMiliunits } from "@/lib/utils";
 
 const formSchema = z.object({
   date: z.coerce.date(),
@@ -61,9 +64,15 @@ export const TransactionForm = ({
     defaultValues: defaultValues,
   });
 
-  const handleSubmit = (values: ApiFormValues) => {
-    // onSubmit(values);
-    console.log({ values });
+  const handleSubmit = (values: FormValues) => {
+    const amountInMiliUnits = convertAmountToMiliunits(
+      parseFloat(values.amount)
+    );
+
+    onSubmit({
+      ...values,
+      amount: amountInMiliUnits,
+    });
   };
 
   const handleDelete = () => {
@@ -145,8 +154,41 @@ export const TransactionForm = ({
             </FormItem>
           )}
         />
+        <FormField
+          name="amount"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Amount</FormLabel>
+              <FormControl>
+                <AmountInput
+                  {...field}
+                  disabled={disabled}
+                  placeholder="0.00"
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="notes"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Notes</FormLabel>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  value={field.value ?? ""}
+                  disabled={disabled}
+                  placeholder="Add a note"
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
         <Button className="w-full" disabled={disabled}>
-          {id ? "Save changes" : "Create Account"}
+          {id ? "Save changes" : "Add a Transaction"}
         </Button>
         {!!id && (
           <Button
@@ -157,7 +199,7 @@ export const TransactionForm = ({
             className="w-full"
           >
             <Trash className="size-4 mr-2" />
-            Delete Account
+            Delete Transaction
           </Button>
         )}
       </form>
