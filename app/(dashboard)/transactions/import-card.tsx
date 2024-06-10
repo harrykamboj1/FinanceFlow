@@ -2,7 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { ImportTable } from "./import-table";
-const dateFormat = "yyyy-MM-dd HH:mm:ss";
+import { Item } from "@radix-ui/react-select";
+import { convertAmountToMiliunits } from "@/lib/utils";
+import { format, parse } from "date-fns";
+const dateFormat = "dd-MM-yyyy";
 const outFormat = "yyyy-MM-dd";
 
 const requiredOptions = ["amount", "payee", "date"];
@@ -46,6 +49,47 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
 
   const progress = Object.values(selectedColumns).filter(Boolean).length;
 
+  const handleContinue = () => {
+    const getColumnIndex = (column: string) => {
+      return column.split("_")[1];
+    };
+    const mappedData = {
+      headers: headers.map((_headers, index) => {
+        const columnIndex = getColumnIndex(`column_${index}`);
+        return selectedColumns[`column_${index}`] || null;
+      }),
+      body: body
+        .map((row) => {
+          const transformRow = row.map((cell, index) => {
+            const columnIndex = getColumnIndex(`column_${index}`);
+            return selectedColumns[`column_${index}`] ? cell : null;
+          });
+
+          return transformRow.every((item) => item === null)
+            ? []
+            : transformRow;
+        })
+        .filter((row) => row.length > 0),
+    };
+
+    const arrayOfData = mappedData.body.map((row) => {
+      return row.reduce((acc: any, cell, index) => {
+        const header = mappedData.headers[index];
+        if (header !== null) {
+          acc[header] = cell;
+        }
+
+        return acc;
+      }, {});
+    });
+
+    const formattedData = arrayOfData.map((item) => ({
+      ...item,
+      amount: convertAmountToMiliunits(parseFloat(item.amount)),
+    }));
+    onSubmit(formattedData);
+  };
+
   return (
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
       <Card className="border-none drop-shadow-sm">
@@ -60,7 +104,7 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
             <Button
               size="sm"
               disabled={progress < requiredOptions.length}
-              onClick={() => {}}
+              onClick={handleContinue}
               className="w-full lg:w-auto"
             >
               Continue ({progress} / {requiredOptions.length})
