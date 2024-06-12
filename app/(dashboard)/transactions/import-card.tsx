@@ -56,13 +56,13 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
     const mappedData = {
       headers: headers.map((_headers, index) => {
         const columnIndex = getColumnIndex(`column_${index}`);
-        return selectedColumns[`column_${index}`] || null;
+        return selectedColumns[`column_${columnIndex}`] || null;
       }),
       body: body
         .map((row) => {
           const transformRow = row.map((cell, index) => {
             const columnIndex = getColumnIndex(`column_${index}`);
-            return selectedColumns[`column_${index}`] ? cell : null;
+            return selectedColumns[`column_${columnIndex}`] ? cell : null;
           });
 
           return transformRow.every((item) => item === null)
@@ -87,7 +87,9 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
       ...item,
       amount: convertAmountToMiliunits(parseFloat(item.amount)),
     }));
-    onSubmit(formattedData);
+    const actualData = formattedData.filter((item) => item.date != "");
+    console.log(actualData);
+    onSubmit(actualData);
   };
 
   return (
@@ -98,7 +100,7 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
             Import Transaction
           </CardTitle>
           <div className="flex flex-col lg:flex-row gap-y-2 items-center gap-x-2">
-            <Button onClick={() => {}} size={"sm"} className="w-full lg:w-auto">
+            <Button onClick={onCancel} size={"sm"} className="w-full lg:w-auto">
               Cancel
             </Button>
             <Button
