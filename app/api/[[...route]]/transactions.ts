@@ -13,6 +13,23 @@ import { and, desc, eq, gte, inArray, lte, sql } from "drizzle-orm";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 
+function stringify(obj: any) {
+  let cache: any = [];
+  let str = JSON.stringify(obj, function (key, value) {
+    if (typeof value === "object" && value !== null) {
+      if (cache.indexOf(value) !== -1) {
+        // Circular reference found, discard key
+        return;
+      }
+      // Store value in our collection
+      cache.push(value);
+    }
+    return value;
+  });
+  cache = null; // reset the cache
+  return str;
+}
+
 const app = new Hono()
   .get(
     "/",
@@ -191,7 +208,9 @@ const app = new Hono()
       if (!auth?.userId) {
         return c.json({ error: "UnAuthorized" }, 401);
       }
-      const data = db
+
+      console.log(values);
+      const data = await db
         .insert(transactions)
         .values(
           values.map((value) => ({
