@@ -57,7 +57,6 @@ export function NewTransactionSheet() {
   const isLoading = categoryQuery.isLoading || accountQuery.isLoading;
 
   const onSubmit = (values: FormValues) => {
-    console.log(values);
     mutation.mutate(values, {
       onSuccess: () => {
         onClose();

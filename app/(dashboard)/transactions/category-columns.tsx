@@ -1,3 +1,4 @@
+import { useNewCategory } from "@/features/categories/hooks/use-new-category";
 import { useOpenCategory } from "@/features/categories/hooks/use-open-category";
 import { cn } from "@/lib/utils";
 import { TriangleAlert } from "lucide-react";

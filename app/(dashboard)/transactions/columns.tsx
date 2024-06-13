@@ -75,8 +75,8 @@ export const columns: ColumnDef<ResponseType>[] = [
     cell: ({ row }) => {
       return (
         <CategoryColumn
-          category={row.original.category}
-          categoryId={row.original.categoryId}
+          category={row?.original?.category || ""}
+          categoryId={row?.original?.categoryId || ""}
         />
       );
     },
