@@ -23,7 +23,10 @@ export const useGetTransactions = () => {
         throw new Error("Fail to fetch ̥transactions");
       }
       const { data } = await response.json();
-      return data;
+      return data.map((transaction) => ({
+        ...transaction,
+        amount: convertAmountFromMiliunits(transaction.amount),
+      }));
     },
   });
 

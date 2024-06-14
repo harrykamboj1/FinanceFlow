@@ -109,9 +109,7 @@ export const columns: ColumnDef<ResponseType>[] = [
       );
     },
     cell: ({ row }) => {
-      const amount = convertAmountFromMiliunits(
-        parseFloat(row.getValue("amount"))
-      );
+      const amount = parseFloat(row.getValue("amount"));
       const formatted = new Intl.NumberFormat("en-IN", {
         style: "currency",
         currency: "INR",
