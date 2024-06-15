@@ -56,3 +56,30 @@ export function fillMissingDays(
 
   return transactionsByDay;
 }
+
+export function formatCurrency(amount: any) {
+  const amount1 = parseFloat(amount);
+  const formatted = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+  }).format(amount1);
+
+  return formatted;
+}
+
+export function formatPercentage(
+  value: number,
+  options: { addPrefix?: boolean } = {
+    addPrefix: false,
+  }
+) {
+  const result = new Intl.NumberFormat("en-IN", {
+    style: "percent",
+  }).format(value / 100);
+
+  if (options.addPrefix && value > 0) {
+    return `+${result}`;
+  }
+
+  return result;
+}
