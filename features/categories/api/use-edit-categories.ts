@@ -27,6 +27,7 @@ export const useEditCategory = (id?: string) => {
       query.invalidateQueries({ queryKey: ["category", { id }] });
       query.invalidateQueries({ queryKey: ["categories"] });
       query.invalidateQueries({ queryKey: ["transactions"] });
+      query.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
       toast.error("Fail to create category");
