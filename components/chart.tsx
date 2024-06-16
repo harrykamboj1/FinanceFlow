@@ -5,11 +5,11 @@ import {
   FileSearch,
   LineChartIcon,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "./card";
-import { AreaVariant } from "../areaVariant";
-import { BarVariant } from "../bar-variant";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { AreaVariant } from "./areaVariant";
+import { BarVariant } from "./bar-variant";
 import { LineChart } from "recharts";
-import { LineVariant } from "../line-variant";
+import { LineVariant } from "./line-variant";
 import { useState } from "react";
 import {
   Select,
@@ -17,7 +17,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./select";
+} from "./ui/select";
 
 type Props = {
   data?: {
