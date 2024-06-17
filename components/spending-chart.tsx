@@ -14,9 +14,8 @@ import { Skeleton } from "./ui/skeleton";
 
 type Props = {
   data?: {
-    date: string;
-    income: number;
-    expenses: number;
+    value: number;
+    name: string;
   }[];
 };
 
