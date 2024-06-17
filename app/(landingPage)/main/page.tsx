@@ -8,7 +8,7 @@ const LandingPage = () => {
   const router = useRouter();
   return (
     <div className="">
-      <div className="bg-blue-700 flex items-center justify-between px-5 py-5  shadow-sm fixed w-full">
+      <div className="bg-gradient-to-b from-blue-700 to-blue-500 flex items-center justify-between px-5 py-5  shadow-sm fixed w-full">
         <div className="flex items-center justify-center">
           <Image src="/logo.svg" alt="Logo" height={10} width={40} />
           <p className="text-white font-semibold pl-2 text-2xl">FinanceFlow</p>
@@ -44,7 +44,7 @@ const LandingPage = () => {
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
-                className="block w-full rounded bg-blue-700 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-800 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+                className="block w-full rounded bg-gradient-to-b from-blue-700 to-blue-500 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-800 focus:outline-none focus:ring  sm:w-auto"
                 href="/"
               >
                 Get Started
