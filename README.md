@@ -16,7 +16,7 @@ Welcome to FinanceFlow! This is a comprehensive Finance SaaS Platform designed t
 
 ## Live Demo
 
-Check out the live demo of the project: [FinanceFlow Live Demo](finance-flow-lovat.vercel.app)
+Check out the live demo of the project: [FinanceFlow Live Demo](https://finance-flow-lovat.vercel.app/)
 
 ## Technologies Used
 
