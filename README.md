@@ -1,37 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# FinanceFlow
+
+Welcome to FinanceFlow! This is a comprehensive Finance SaaS Platform designed to help you track your income and expenses, categorize transactions, and gain insights through detailed charts. 
+
 ![image](https://github.com/harrykamboj1/FinanceFlow/assets/49549662/b86d1576-5911-4655-93bd-9d08a6dfd505)
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Revenue Tracking**: Monitor your revenue over time.
+- **Expense Management**: Keep a record of your expenses.
+- **Income Tracking**: Track your income with ease.
+- **Categorization**: Categorize your transactions for better organization.
+- **Charts and Graphs**: Visualize your financial data through charts and graphs.
+- **CSV Upload**: Upload CSV files to track transactions.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Live Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Check out the live demo of the project: [FinanceFlow Live Demo](finance-flow-lovat.vercel.app)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies Used
 
-## Learn More
+- **Frontend**: Next.js, Tanstack query,Tailwind css, Recharts
+- **Backend**: Node.js, Hono, Drizzle
+- **Database**: PostgreSQL
+- **Authentication**: Clerk Auth
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To run this project locally, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/financeflow.git
+2. Navigate to the project directory:
+   ```bash
+   cd financeflow
+3. Install the dependencies:
+   ```bash
+   npm install
+4. Create a .env file in the root of the server directory and add your environment variables.
+5. Start the development server:
+   ```bash
+   npm run dev
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
